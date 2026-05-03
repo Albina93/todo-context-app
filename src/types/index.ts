@@ -1,6 +1,6 @@
 // single Todo item
 export interface Todo {
-  id: string;
+  id: number;
   text: string;
   completed: boolean;
 }
@@ -15,9 +15,9 @@ export type Theme = "light" | "dark";
 export interface TodoContextType {
   todos: Todo[];
   addTodo: (text: string) => void;
-  toggleTodo: (id: string) => void;
-  deleteTodo: (id: string) => void;
-  editTodo: (id: string, newText: string) => void;
+  toggleTodo: (id: number) => void;
+  deleteTodo: (id: number) => void;
+  editTodo: (id: number, newText: string) => void;
   clearCompleted: () => void;
 }
 

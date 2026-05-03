@@ -1,10 +1,14 @@
 import "./App.css";
-
+import { TodoInput } from "./components/TodoInput";
+import { TodoProvider } from "./contexts/TodoContext";
 function App() {
   return (
-    <>
-      <h1>Todo context app</h1>
-    </>
+    <TodoProvider>
+      <div>
+        <h1>Todo App (Context API)</h1>
+        <TodoInput />
+      </div>
+    </TodoProvider>
   );
 }
 
