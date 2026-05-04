@@ -1,9 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import type { Todo } from "../types";
+import type { Todo, TodoContextType } from "../types";
+import type { ReactNode } from "react";
 
-const TodoContext = createContext(null);
+const TodoContext = createContext<TodoContextType | null>(null);
 
-export function TodoProvider({ children }) {
+export function TodoProvider({ children }: { children: ReactNode }) {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = (text: string) => {
@@ -33,11 +34,11 @@ export function TodoProvider({ children }) {
     );
   };
 
-  const clearCompleted = () => [
-    setTodos((prev) => prev.filter((todo) => !todo.completed)),
-  ];
+  const clearCompleted = () => {
+    setTodos((prev) => prev.filter((todo) => !todo.completed));
+  };
 
-  const value = {
+  const value: TodoContextType = {
     todos,
     addTodo,
     toggleTodo,
@@ -49,7 +50,7 @@ export function TodoProvider({ children }) {
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
 
-export function useTodos() {
+export function useTodos(): TodoContextType {
   const context = useContext(TodoContext);
   if (!context) {
     throw new Error("useTodos must be used inside a TodoProvider");
