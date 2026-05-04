@@ -15,7 +15,19 @@ export function TodoProvider({ children }) {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  const value = { todos, addTodo };
+  const toggleTodo = (id: number) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const value = { todos, addTodo, toggleTodo, deleteTodo };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
